@@ -1,7 +1,16 @@
 const express=require('express');
+const cookieParser=require('cookie-parser');
 const app=express();
 
 const expressLayouts=require('express-ejs-layouts');
+const db=require('./config/mongoose');
+
+// setting up the middleware to use cookie 
+app.use(express.urlencoded());
+
+// setting to use the cookie
+app.use(cookieParser());
+
 const port=8000;
 
 app.use(expressLayouts);
