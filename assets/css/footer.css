@@ -1,0 +1,14 @@
+footer {
+  display: flex;
+  background-color: #6c757d;
+  padding: 5px;
+  color: aliceblue; }
+  footer p {
+    margin-left: 10px; }
+  footer ul {
+    margin-left: 0px; }
+    footer ul li {
+      list-style: none; }
+      footer ul li a {
+        text-decoration: none;
+        color: aliceblue; }

@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #0096c7;
+  color: aliceblue;
+  font-weight: 700;
+  padding: 5px;
+  font-size: 1.1em; }
+  header ul {
+    display: flex; }
+    header ul li {
+      list-style: none;
+      margin-left: 10px; }
+      header ul li a {
+        text-decoration: none;
+        color: aliceblue; }
