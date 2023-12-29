@@ -3,9 +3,18 @@ const User=require('../models/user');
 
 module.exports.profile=function(req,res)
 {
-    return res.render('user',{
-        title:"user profile"
+    User.findById(req.params.id)
+    .then((user)=>{
+        return res.render('user',{
+            title:"user profile",
+            profile_user:user
+        })
     })
+    .catch((err) => {
+        console.error('Error occurred:', err);
+        return res.status(500).send('Internal Server Error');
+    });
+    
 }
 
 module.exports.signUp=function(req,res)
@@ -14,9 +23,11 @@ module.exports.signUp=function(req,res)
     {
         return res.redirect('/users/profile');
     }
-    return res.render('user_sign_up',{
-        title:"sign up page"
-    })
+    else{
+        res.render('user_sign_up',{
+            title:"sign up page"
+        })
+    }
 }
 
 // rendering the sign in page
@@ -44,7 +55,8 @@ module.exports.create=function(req,res)
     .then((user) => {
     if (!user) {
       // If the user doesn't exist, create a new one
-      return User.create(req.body);
+      User.create(req.body);
+      return res.redirect('/users/sign-in');
     }
     // If the user already exists, redirect back
         return res.redirect('back');
@@ -66,3 +78,23 @@ module.exports.destroySession=function(req, res, next) {
       res.redirect('/');
     });
   }
+
+module.exports.update = function (req, res) {
+    User.findByIdAndUpdate(
+        req.params.id, // assuming req.id is the user's ID to be updated
+        {
+            email: req.body.email,
+            name: req.body.name
+        }
+    )
+    .then((user) => {
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        return res.redirect('/users/profile/' + user.id);
+    })
+    .catch((err) => {
+        console.error('Error occurred:', err);
+        return res.status(500).send('Internal Server Error');
+    });
+};

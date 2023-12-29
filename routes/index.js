@@ -7,7 +7,7 @@ router.get('/',homeController.home);
 
 //this line defines the route for user request.
 router.use('/users',require('./users'));
-router.use('/post',require('./posts'));
+router.use('/posts',require('./posts'));
 router.use('/comments',require('./comments'));
 
 console.log('router loaded');
