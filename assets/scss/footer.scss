@@ -1,21 +1,28 @@
-footer{
-    display: flex;
-    background-color: #6c757d;
-    padding:5px;
-    color: aliceblue;
+#layout-footer {
+  color: white;
+  position: fixed;
+  bottom: 0; /* Stick to the bottom */
+  width: 100%; /* Full width */
+  z-index: 100; /* Adjust z-index as needed */
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
 
-    p{
-        margin-left:10px;
-    }
+  background: grey;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: flex-start;
 
-    ul{
-        margin-left: 0px;
-        li{
-            list-style: none;
-            a{
-                text-decoration: none;
-                color: aliceblue;
-            }
-        }
+  .footer-nav {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin-right: 10px; /* Adjust as needed */
+      }
     }
+  }
 }

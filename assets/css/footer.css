@@ -1,14 +1,22 @@
-footer {
+#layout-footer {
+  color: white;
+  position: fixed;
+  bottom: 0;
+  /* Stick to the bottom */
+  width: 100%;
+  /* Full width */
+  z-index: 100;
+  /* Adjust z-index as needed */
+  background: grey;
+  padding: 5px 10px;
   display: flex;
-  background-color: #6c757d;
-  padding: 5px;
-  color: aliceblue; }
-  footer p {
-    margin-left: 10px; }
-  footer ul {
-    margin-left: 0px; }
-    footer ul li {
-      list-style: none; }
-      footer ul li a {
-        text-decoration: none;
-        color: aliceblue; }
+  justify-content: flex-start; }
+  #layout-footer a {
+    color: white;
+    text-decoration: none; }
+  #layout-footer .footer-nav ul {
+    list-style: none; }
+    #layout-footer .footer-nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+      /* Adjust as needed */ }

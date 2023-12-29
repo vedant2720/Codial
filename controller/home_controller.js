@@ -22,15 +22,23 @@ module.exports.home=function(req,res){
     // })
 
     // populate the user of the each post 
-    Post.find({}).populate('user').exec()
-    .then((posts)=>{
-        return res.render('home',{
-            title:"Codial | Home",
-            posts:posts
-        })
+    Post.find({})
+    .populate('user')
+    .populate({
+        path: 'comment',
+        populate: {
+            path: 'user'
+        }
     })
-    .catch((err)=>{
-        console.log('error in finding user who posted');
-        return;
+    .exec()
+    .then((posts) => {
+        return res.render('home', {
+            title: "Codial | Home",
+            posts: posts
+        });
     })
+    .catch((err) => {
+        console.log('Error in finding user who posted:', err);
+        return res.status(500).send('Internal Server Error');
+    });
 }
