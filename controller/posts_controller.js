@@ -23,7 +23,7 @@ module.exports.create=async function(req,res)
         return res.redirect('back');
     } catch (error) {
 
-        req,flash('error',err);
+        req.flash('error',err);
         return res.redirect('back');
     }
 }
@@ -37,10 +37,19 @@ module.exports.destroy = async function(req, res) {
         }
 
         await Comment.deleteMany({ post: req.params.id });
+
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    post_id:req.params.id
+                },
+                message:"Post deleted successfully"
+            });
+        }
         req.flash('success',"Post and Associated Comments Deleted Successfully!");
         return res.redirect('/');
    } catch (err){
-        req,flash('error',err);
+        req.flash('error',err);
         return res.redirect('back');
    }
 };
