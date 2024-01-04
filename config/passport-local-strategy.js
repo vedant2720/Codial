@@ -7,9 +7,10 @@ const { response } = require('express');
 
 passport.use(new LocalStrategy(
     {
-        usernameField:"email"
+        usernameField:"email",
+        passReqToCallback:true
     },
-    function(email,password,done){
+    function(req,email,password,done){
         // first arr is from user table which we want to match
         // and the second one is email which is passed to match 
         //done is somting that tell success of the event. and it take two argument done(error,authentication status)
@@ -20,7 +21,8 @@ passport.use(new LocalStrategy(
             User.findOne({ email: email })
                 .then((user) => {
                     if (!user || user.password !== password) {
-                        console.log("Invalid username/password");
+                        req.flash("error","Invalid Username/Password");
+                        // console.log("Invalid username/password");
                         return done(null, false);
                     }
                     else{
@@ -28,7 +30,8 @@ passport.use(new LocalStrategy(
                     }
                 })
                 .catch((err) => {
-                    console.log("Error in finding the user");
+                    // console.log("Error in finding the user");
+                    req.flash("error",err);
                     return done(err);
                 });
         } catch (error) {

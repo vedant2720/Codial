@@ -18,9 +18,10 @@ module.exports.create=async function(req,res){
         post.comment.push(comment);
         post.save();
         
+        req.flash('success',"Comment Added");
         return res.redirect('/');
     } catch (err) {
-        console.log(err);
+        req.flash('error',err);
         return console.log("error while creating the comment");
     }
 }
@@ -35,10 +36,11 @@ module.exports.destroy=async function(req,res){
             return res.status(404).send("Post not found");
         }
         const postId=comment.post;
-        let post=await Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}})
+        let post=await Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}});
+        req.flash('success',"Comment Deleted Successfully");
         return res.redirect('back');
     } catch (error) {
-        console.log(err);
+        req.flash('error',err);
         return console.log("error while destrying the comment");
     }
 }
